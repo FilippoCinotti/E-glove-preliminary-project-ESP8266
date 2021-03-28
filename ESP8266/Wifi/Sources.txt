@@ -1,0 +1,20 @@
+ESP8266 SOFT AP
+
+https://randomnerdtutorials.com/esp8266-nodemcu-access-point-ap-web-server/
+
+ESP8266 AP
+
+https://randomnerdtutorials.com/esp8266-web-server-spiffs-nodemcu/
+https://randomnerdtutorials.com/esp8266-nodemcu-access-point-ap-web-server/
+https://tttapa.github.io/ESP8266/Chap07%20-%20Wi-Fi%20Connections.html
+
+SPIFFS
+
+https://randomnerdtutorials.com/install-esp8266-filesystem-uploader-arduino-ide/ ->INSTALLATION
+https://randomnerdtutorials.com/esp8266-web-server-spiffs-nodemcu/
+https://tttapa.github.io/ESP8266/Chap11%20-%20SPIFFS.html
+https://www.instructables.com/id/Using-ESP8266-SPIFFS/
+
+WHY ESP32 BETTER THAN ESP8266
+
+https://techtutorialsx.com/2017/12/01/esp32-arduino-asynchronous-http-webserver/

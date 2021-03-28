@@ -1,0 +1,258 @@
+<!DOCTYPE HTML><html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <style>
+    body {
+      min-width: 310px;
+    	max-width: 800px;
+    	height: 400px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-family: Arial;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+      .cardt{
+    min-width: 350px;
+     min-height: 250px;
+     background: #02b875;
+     padding: 30px;
+     box-sizing: border-box;
+     color: #FFF;
+     margin:20px;
+     box-shadow: 0px 2px 18px -4px rgba(0,0,0,0.75);
+}
+           .cardi{
+    min-width: 350px;
+     min-height: 250px;
+     background: #02b875;
+     padding: 30px;
+     box-sizing: border-box;
+     color: #FFF;
+     margin:20px;
+     box-shadow: 0px 2px 18px -4px rgba(0,0,0,0.75);
+}
+           .cardm{
+    min-width: 350px;
+     min-height: 250px;
+     background: #02b875;
+     padding: 30px;
+     box-sizing: border-box;
+     color: #FFF;
+     margin:20px;
+     box-shadow: 0px 2px 18px -4px rgba(0,0,0,0.75);
+}
+           .carda{
+    min-width: 350px;
+     min-height: 250px;
+     background: #02b875;
+     padding: 30px;
+     box-sizing: border-box;
+     color: #FFF;
+     margin:20px;
+     box-shadow: 0px 2px 18px -4px rgba(0,0,0,0.75);
+}
+#inline{width:100%;height:auto;background-color:white;display:flex;} 
+.one,.two{width:50%;height:100px;background-color:green;margin:10px;} 
+  </style>
+</head>
+<body>
+  <h2>E-glove interface</h2>
+   <div id="inline"> 
+   <div class="cardt">
+  <h3>Thumb force:        </h3>
+       <h1><span id="Thumb">0</span> N</h1>
+  </div>
+      <div class="cardi" >
+  <h3>Index force:        </h3>
+          <h1><span id="Index">0</span> N</h1>
+  </div>
+    </div>
+    <div id="inline"> 
+      <div class="cardm">
+  <h3>Middle finger force:</h3>
+          <h1><span id="Middle">0</span> N</h1>
+  </div>
+      <div class="carda">
+  <h3>Arch force:         </h3>
+          <h1><span id="Arch">0</span> N</h1>
+  </div>
+    </div>
+  <div id="chart-thumb" class="container"></div>
+  <div id="chart-index" class="container"></div>
+  <div id="chart-middle-finger" class="container"></div>
+  <div id="chart-arch" class="container"></div>
+</body>
+<script>
+  
+
+
+var chartT = new Highcharts.Chart({
+  chart:{ renderTo : 'chart-thumb' },
+  title: { text: 'Thumb force' },
+  series: [{
+    showInLegend: false,
+    data: []
+  }],
+  plotOptions: {
+    line: { animation: false,
+      dataLabels: { enabled: true }
+    },
+    series: { color: '#059e8a' }
+  },
+  xAxis: { type: 'datetime',
+    dateTimeLabelFormats: { millisecond: '%M:%S' }
+  },
+  yAxis: {
+    title: { text: 'Force (N)' }
+  },
+  credits: { enabled: false }
+});
+setInterval(function ( ) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 20) {
+      document.getElementById("Thumb").innerHTML =
+      this.responseText;
+      var x = (new Date()).getTime(),
+          y = parseFloat(this.responseText);
+      //console.log(this.responseText);
+      if(chartT.series[0].data.length > 40) {
+        chartT.series[0].addPoint([x, y], true, true, true);
+      } else {
+        chartT.series[0].addPoint([x, y], true, false, true);
+      }
+    }
+  };
+  xhttp.open("GET", "/thumb", true);
+  xhttp.send();
+}, 20 ) ;
+
+var chartH = new Highcharts.Chart({
+  chart:{ renderTo:'chart-index' },
+  title: { text: 'Index force' },
+  series: [{
+    showInLegend: false,
+    data: []
+  }],
+  plotOptions: {
+    line: { animation: false,
+      dataLabels: { enabled: true }
+    }
+  },
+  xAxis: {
+    type: 'datetime',
+    dateTimeLabelFormats: { millisecond: '%M:%S' }
+  },
+  yAxis: {
+    title: { text: 'Force (N)' }
+  },
+  credits: { enabled: false }
+});
+setInterval(function ( ) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 20) {
+        document.getElementById("Index").innerHTML =
+      this.responseText;
+      var x = (new Date()).getTime(),
+          y = parseFloat(this.responseText);
+      //console.log(this.responseText);
+      if(chartH.series[0].data.length > 40) {
+        chartH.series[0].addPoint([x, y], true, true, true);
+      } else {
+        chartH.series[0].addPoint([x, y], true, false, true);
+      }
+    }
+  };
+  xhttp.open("GET", "/index", true);
+  xhttp.send();
+}, 20 ) ;
+
+var chartP = new Highcharts.Chart({
+  chart:{ renderTo:'chart-middle-finger' },
+  title: { text: 'Middle finger force' },
+  series: [{
+    showInLegend: false,
+    data: []
+  }],
+  plotOptions: {
+    line: { animation: false,
+      dataLabels: { enabled: true }
+    },
+    series: { color: '#18009c' }
+  },
+  xAxis: {
+    type: 'datetime',
+    dateTimeLabelFormats: { millisecond: '%M:%S' }
+  },
+  yAxis: {
+    title: { text: 'Force (N)' }
+  },
+  credits: { enabled: false }
+});
+setInterval(function ( ) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 20) {
+        document.getElementById("Middle").innerHTML =
+      this.responseText;
+      var x = (new Date()).getTime(),
+          y = parseFloat(this.responseText);
+      //console.log(this.responseText);
+      if(chartP.series[0].data.length > 40) {
+        chartP.series[0].addPoint([x, y], true, true, true);
+      } else {
+        chartP.series[0].addPoint([x, y], true, false, true);
+      }
+    }
+  };
+  xhttp.open("GET", "/middle", true);
+  xhttp.send();
+}, 20 ) ;
+var chartA = new Highcharts.Chart({
+  chart:{ renderTo:'chart-arch' },
+  title: { text: 'Arch force' },
+  series: [{
+    showInLegend: false,
+    data: []
+  }],
+  plotOptions: {
+    line: { animation: false,
+      dataLabels: { enabled: true }
+    },
+    series: { color: '#059e8a' }
+  },
+  xAxis: {
+    type: 'datetime',
+    dateTimeLabelFormats: { millisecond: '%M:%S' }
+  },
+  yAxis: {
+    title: { text: 'Force (N)' }
+  },
+  credits: { enabled: false }
+});
+setInterval(function ( ) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 20) {
+      document.getElementById("Arch").innerHTML =
+      this.responseText;
+      var x = (new Date()).getTime(),
+          y = parseFloat(this.responseText);
+      //console.log(this.responseText);
+      if(chartA.series[0].data.length > 40) {
+        chartA.series[0].addPoint([x, y], true, true, true);
+      } else {
+        chartA.series[0].addPoint([x, y], true, false, true);
+      }
+       text(round(y,2), 350, 110);
+    }
+  };
+  xhttp.open("GET", "/arch", true);
+  xhttp.send();
+}, 20 ) ;
+</script>
+</html>
